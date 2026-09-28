@@ -51,7 +51,6 @@ freelance-platform/
 │   ├── contracts/        Escrow.sol
 │   ├── scripts/          deploy.js, evaluation scripts
 │   └── test/             Escrow tests
-├── prd.md, architecture.md, techstack.md, design.md, roadmap.md
 └── req.txt          System requirements and dependency list
 ```
 
@@ -179,13 +178,3 @@ Public reputation endpoints never return raw scores, individual reviews or revie
 
 - **Frontend**: Vercel (`client/vercel.json` rewrites all routes to `index.html` for client-side routing)
 - **Backend**: any Node host (e.g. Render). Set the `server/.env` variables in the host's dashboard.
-
----
-
-## Documentation
-
-- [`prd.md`](prd.md): product requirements
-- [`architecture.md`](architecture.md): system architecture and cryptographic design
-- [`techstack.md`](techstack.md): technology choices
-- [`design.md`](design.md): UI/UX design system
-- [`roadmap.md`](roadmap.md): engineering roadmap
