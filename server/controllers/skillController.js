@@ -12,9 +12,12 @@ const callGroq = async (prompt) => {
       'Authorization': `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
+      // llama-3.3-70b-versatile was retired by Groq; override with GROQ_MODEL in .env if needed
+      model: process.env.GROQ_MODEL || 'openai/gpt-oss-120b',
       messages: [{ role: 'user', content: prompt }],
-      max_tokens: 500,
+      // gpt-oss is a reasoning model: its reasoning counts toward this limit, so keep effort low and leave headroom
+      reasoning_effort: 'low',
+      max_completion_tokens: 1500,
       temperature: 0.7,
     }),
   });

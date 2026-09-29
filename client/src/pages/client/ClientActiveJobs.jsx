@@ -47,30 +47,28 @@ const ClientActiveJobs = () => {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ background: "linear-gradient(135deg, #190019 0%, #2B124C 100%)" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--bg)" }}>
       <ClientSidebar />
       <main className="flex-1 p-8 overflow-auto">
         <div className="mb-8">
-          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "rgba(133,79,108,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>Client Portal</p>
-          <h1 className="text-3xl font-black mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>Active Jobs</h1>
-          <p className="text-sm" style={{ color: "rgba(223,182,178,0.4)" }}>Track progress and release milestone payments</p>
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--muted)" }}>Client Portal</p>
+          <h1 className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>Active Jobs</h1>
+          <p className="text-sm" style={{ color: "var(--muted)" }}>Track progress and release milestone payments</p>
         </div>
 
         {loading && (
-          <div className="flex items-center gap-3" style={{ color: "rgba(223,182,178,0.4)" }}>
+          <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
             <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin"/>
-            <span className="text-sm" style={{ fontFamily: "Space Grotesk, sans-serif" }}>Loading...</span>
+            <span className="text-sm">Loading...</span>
           </div>
         )}
 
         {!loading && jobs.length === 0 && (
           <div className="text-center py-20">
             <div className="text-5xl mb-4">✅</div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>No active jobs</h3>
-            <p className="text-sm mb-6" style={{ color: "rgba(223,182,178,0.4)" }}>Hire a freelancer to see jobs here</p>
-            <button onClick={() => navigate("/client/my-jobs")}
-              className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: "linear-gradient(135deg, #522B5B, #854F6C)", color: "#FBE4D8" }}>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: "var(--ink)" }}>No active jobs</h3>
+            <p className="text-sm mb-6" style={{ color: "var(--muted)" }}>Hire a freelancer to see jobs here</p>
+            <button onClick={() => navigate("/client/my-jobs")} className="rg-pill">
               View Posted Jobs
             </button>
           </div>
@@ -79,21 +77,19 @@ const ClientActiveJobs = () => {
         <div className="flex flex-col gap-6">
           {jobs.map(job => (
             <div key={job._id} className="rounded-2xl overflow-hidden"
-              style={{ background: "rgba(43,18,76,0.4)", border: "1px solid rgba(133,79,108,0.2)" }}>
+              style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
 
               {/* Job header */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-bold text-lg" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>{job.title}</h3>
+                    <h3 className="font-bold text-lg" style={{ color: "var(--ink)" }}>{job.title}</h3>
                     <span className="text-xs px-2 py-0.5 rounded-full"
-                      style={{ background: job.status === 'completed' ? "rgba(133,79,108,0.3)" : "rgba(133,79,108,0.15)", color: "#DFB6B2", border: "1px solid rgba(133,79,108,0.3)" }}>
+                      style={{ background: job.status === 'completed' ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)", color: "var(--ink)", border: "1px solid var(--border)" }}>
                       {job.status === 'completed' ? '🏆 Completed' : '⚡ In Progress'}
                     </span>
                   </div>
-                  <button onClick={() => navigate(`/client/job/${job._id}`)}
-                    className="text-xs px-4 py-2 rounded-xl transition-all"
-                    style={{ background: "rgba(133,79,108,0.15)", color: "#DFB6B2", border: "1px solid rgba(133,79,108,0.25)" }}>
+                  <button onClick={() => navigate(`/client/job/${job._id}`)} className="rg-pill-outline text-xs px-4 py-2">
                     Full Details →
                   </button>
                 </div>
@@ -101,12 +97,12 @@ const ClientActiveJobs = () => {
                 {/* Progress bar */}
                 <div className="mb-4">
                   <div className="flex justify-between text-sm mb-2">
-                    <span style={{ color: "rgba(223,182,178,0.5)" }}>Payment Released</span>
-                    <span className="font-bold" style={{ color: "#DFB6B2" }}>{job.paymentProgress || 0}% of {job.budget} MSTC</span>
+                    <span style={{ color: "var(--muted)" }}>Payment Released</span>
+                    <span className="font-bold" style={{ color: "var(--ink)" }}>{job.paymentProgress || 0}% of {job.budget} MSTC</span>
                   </div>
-                  <div className="w-full rounded-full h-3 overflow-hidden" style={{ background: "rgba(133,79,108,0.15)" }}>
+                  <div className="w-full rounded-full h-3 overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
                     <div className="h-3 rounded-full transition-all duration-700"
-                      style={{ width: `${job.paymentProgress || 0}%`, background: "linear-gradient(90deg, #522B5B, #DFB6B2)" }}/>
+                      style={{ width: `${job.paymentProgress || 0}%`, background: "rgba(255,255,255,0.85)" }}/>
                   </div>
                 </div>
 
@@ -115,10 +111,10 @@ const ClientActiveJobs = () => {
                   <div className="flex flex-col gap-2 mb-4">
                     {job.milestones.map((m, i) => (
                       <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl"
-                        style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.12)" }}>
+                        style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
                         <div>
-                          <span className="text-sm font-medium" style={{ color: "#DFB6B2" }}>{m.title}</span>
-                          <span className="text-xs ml-2" style={{ color: "rgba(223,182,178,0.4)" }}>
+                          <span className="text-sm font-medium" style={{ color: "var(--ink)" }}>{m.title}</span>
+                          <span className="text-xs ml-2" style={{ color: "var(--muted)" }}>
                             {m.percentage}% = {(job.budget * m.percentage / 100).toFixed(4)} MSTC
                           </span>
                         </div>
@@ -134,7 +130,7 @@ const ClientActiveJobs = () => {
                 <button
                   onClick={() => setExpandedJob(expandedJob === job._id ? null : job._id)}
                   className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all"
-                  style={{ background: "rgba(133,79,108,0.12)", border: "1px solid rgba(133,79,108,0.2)", color: "#DFB6B2" }}>
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", color: "var(--ink)" }}>
                   {expandedJob === job._id ? "▲ Hide Submissions" : "▼ View & Accept Submissions"}
                 </button>
               </div>

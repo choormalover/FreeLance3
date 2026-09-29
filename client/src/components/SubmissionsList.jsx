@@ -46,22 +46,20 @@ const SubmissionsList = ({ jobId, escrowAddress, onApprove, milestones }) => {
 
   // Loading state — visible skeleton, not blank
   if (loading) return (
-    <div className="rounded-2xl p-6"
-      style={{ background: "rgba(43,18,76,0.4)", border: "1px solid rgba(133,79,108,0.15)", minHeight: "100px" }}>
-      <div className="flex items-center gap-3" style={{ color: "rgba(223,182,178,0.3)" }}>
+    <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)", minHeight: "100px" }}>
+      <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
         <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin"/>
-        <span className="text-sm" style={{ fontFamily: "Space Grotesk, sans-serif" }}>Loading submissions...</span>
+        <span className="text-sm">Loading submissions...</span>
       </div>
     </div>
   );
 
   // No submissions — informative placeholder, not blank
   if (submissions.length === 0) return (
-    <div className="rounded-2xl p-6"
-      style={{ background: "rgba(43,18,76,0.4)", border: "1px solid rgba(133,79,108,0.15)" }}>
-      <div className="flex items-center gap-3" style={{ color: "rgba(223,182,178,0.3)" }}>
+    <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+      <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
         <span className="text-xl">📭</span>
-        <span className="text-sm" style={{ fontFamily: "Space Grotesk, sans-serif" }}>No work submissions yet</span>
+        <span className="text-sm">No work submissions yet</span>
       </div>
     </div>
   );
@@ -74,13 +72,11 @@ const SubmissionsList = ({ jobId, escrowAddress, onApprove, milestones }) => {
   });
 
   return (
-    <div className="rounded-2xl p-6"
-      style={{ background: "rgba(43,18,76,0.4)", border: "1px solid rgba(133,79,108,0.2)" }}>
+    <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>📬 Work Submissions</h3>
+        <h3 className="font-bold" style={{ color: "var(--ink)" }}>📬 Work Submissions</h3>
         {escrowAddress && (
-          <span className="text-xs px-3 py-1 rounded-full"
-            style={{ background: "rgba(25,0,25,0.5)", color: "rgba(223,182,178,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
+          <span className="text-xs px-3 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.03)", color: "var(--muted)", border: "1px solid var(--border)" }}>
             Escrow balance: {escrowBalance} MSTC
           </span>
         )}
@@ -97,22 +93,20 @@ const SubmissionsList = ({ jobId, escrowAddress, onApprove, milestones }) => {
               {milestone && (
                 <div className="flex items-center justify-between px-4 py-2 rounded-xl mb-3"
                   style={{
-                    background: isMilestoneReleased ? "rgba(16,185,129,0.08)" : "rgba(25,0,25,0.4)",
-                    border: `1px solid ${isMilestoneReleased ? "rgba(16,185,129,0.25)" : "rgba(133,79,108,0.15)"}`,
+                    background: isMilestoneReleased ? "rgba(16,185,129,0.08)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${isMilestoneReleased ? "rgba(16,185,129,0.25)" : "var(--border)"}`,
                   }}>
-                  <span className="text-sm font-medium" style={{ color: "#DFB6B2" }}>
+                  <span className="text-sm font-medium" style={{ color: "var(--ink)" }}>
                     Milestone {milestoneIdx + 1}: {milestone.title}
                   </span>
-                  <span className="text-xs font-semibold"
-                    style={{ color: isMilestoneReleased ? "#6ee7b7" : "#fbbf24" }}>
+                  <span className="text-xs font-semibold" style={{ color: isMilestoneReleased ? "#6ee7b7" : "#fbbf24" }}>
                     {isMilestoneReleased ? "✅ Released" : `⏳ ${milestone.percentage}% pending`}
                   </span>
                 </div>
               )}
 
               {subs.map(sub => (
-                <div key={sub._id} className="rounded-xl p-4 mb-3"
-                  style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.15)" }}>
+                <div key={sub._id} className="rounded-xl p-4 mb-3" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs px-3 py-1 rounded-full"
                       style={{
@@ -122,24 +116,22 @@ const SubmissionsList = ({ jobId, escrowAddress, onApprove, milestones }) => {
                       }}>
                       {sub.status}
                     </span>
-                    <span className="text-xs" style={{ color: "rgba(223,182,178,0.4)" }}>
+                    <span className="text-xs" style={{ color: "var(--muted)" }}>
                       {new Date(sub.createdAt).toLocaleDateString()}
                     </span>
                   </div>
 
-                  {sub.message && <p className="text-sm mb-3" style={{ color: "rgba(223,182,178,0.6)" }}>{sub.message}</p>}
+                  {sub.message && <p className="text-sm mb-3" style={{ color: "var(--muted)" }}>{sub.message}</p>}
 
                   <div className="flex items-center gap-3 flex-wrap">
-                    <button onClick={() => handleDownload(sub._id, sub.fileName)}
-                      className="px-4 py-2 rounded-lg text-sm transition-all"
-                      style={{ background: "rgba(133,79,108,0.15)", color: "#DFB6B2", border: "1px solid rgba(133,79,108,0.25)" }}>
+                    <button onClick={() => handleDownload(sub._id, sub.fileName)} className="rg-pill-outline text-sm px-4 py-2">
                       📥 Download {sub.fileName}
                     </button>
 
                     {sub.status === "submitted" && !isMilestoneReleased && onApprove && (
                       <button onClick={() => onApprove(sub._id, milestoneIdx)}
                         className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-                        style={{ background: "linear-gradient(135deg, #16a34a, #22c55e)", color: "white" }}>
+                        style={{ background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.35)", color: "#6ee7b7" }}>
                         ✅ Accept & Release {milestone ? `${milestone.percentage}%` : ""}
                       </button>
                     )}
@@ -149,7 +141,7 @@ const SubmissionsList = ({ jobId, escrowAddress, onApprove, milestones }) => {
                     )}
                   </div>
 
-                  <p className="text-xs mt-2 font-mono" style={{ color: "rgba(133,79,108,0.6)" }}>
+                  <p className="text-xs mt-2 font-mono" style={{ color: "var(--muted)" }}>
                     By: {sub.freelancer?.walletAddress?.slice(0, 10)}...
                   </p>
                 </div>

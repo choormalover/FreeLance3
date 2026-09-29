@@ -1,51 +1,55 @@
 @import "tailwindcss";
 
-/* ── Google Fonts ── */
-* { font-family: 'Outfit', sans-serif; }
-h1, h2, h3 { font-family: 'Syne', sans-serif; }
-
-/* ── Client Purple Palette ── */
+/* ── MotionSites dark theme tokens ── */
 :root {
-  --c-bg:       #190019;
-  --c-bg2:      #2B124C;
-  --c-bg3:      #522B5B;
-  --c-accent:   #854F6C;
-  --c-light:    #DFB6B2;
-  --c-lightest: #FBE4D8;
-  --c-text:     #FBE4D8;
-  --c-muted:    #DFB6B2;
-  --c-border:   rgba(133, 79, 108, 0.35);
-  --c-glow:     rgba(82, 43, 91, 0.6);
-  --c-glass:    rgba(43, 18, 76, 0.45);
+  --ink:      #fafafa;
+  --muted:    #a7a6a6;
+  --nav:      #b6b5b5;
+  --pill:     #ffffff;
+  --pill-ink: #050505;
+  --bg:       #050505;
+  --card:     #0d0d0d;
+  --border:   rgba(255, 255, 255, 0.1);
 }
 
-/* ── Freelancer Blue Palette ── */
-.fl-theme {
-  --f-bg:       #021024;
-  --f-bg2:      #052659;
-  --f-bg3:      #5483B3;
-  --f-accent:   #7DA0CA;
-  --f-light:    #C1E8FF;
-  --f-text:     #C1E8FF;
-  --f-muted:    #7DA0CA;
-  --f-border:   rgba(84, 131, 179, 0.35);
-  --f-glow:     rgba(5, 38, 89, 0.7);
-  --f-glass:    rgba(5, 38, 89, 0.45);
+* { font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+h1, h2, h3 { font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+body { background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+
+/* ── Shared dark-theme components ── */
+.rg-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
 }
 
-/* ── Shared utility classes ── */
-body { background: #0a0a0a; color: white; }
-
-.glass-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.08);
+.rg-pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 999px; background: var(--pill); color: var(--pill-ink);
+  font-weight: 600; border: none; cursor: pointer; padding: 12px 24px;
+  font-family: inherit; transition: opacity .2s ease, transform .2s ease;
+  text-decoration: none; white-space: nowrap;
 }
+.rg-pill:hover { opacity: .9; }
+.rg-pill:disabled { opacity: .5; cursor: default; }
 
-.glow-text {
-  text-shadow: 0 0 40px currentColor;
+.rg-pill-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 999px; background: transparent; color: var(--ink);
+  font-weight: 600; border: 1px solid rgba(255,255,255,.2); cursor: pointer;
+  padding: 12px 24px; font-family: inherit; text-decoration: none; white-space: nowrap;
+  transition: border-color .2s ease, background .2s ease;
 }
+.rg-pill-outline:hover { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
+.rg-pill-outline:disabled { opacity: .5; cursor: default; }
+
+.rg-input {
+  background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 14px;
+  padding: 12px 16px; color: var(--ink); font-family: inherit; outline: none;
+  transition: border-color .2s ease; width: 100%;
+}
+.rg-input:focus { border-color: rgba(255,255,255,.35); }
+.rg-input::placeholder { color: var(--muted); }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }

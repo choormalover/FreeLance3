@@ -106,11 +106,10 @@ const ClientJobDetail = () => {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center"
-      style={{ background: "linear-gradient(135deg, #190019 0%, #2B124C 100%)" }}>
-      <div className="flex items-center gap-3" style={{ color: "rgba(223,182,178,0.4)" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--bg)" }}>
+      <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
         <span className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin"/>
-        <span style={{ fontFamily: "Space Grotesk, sans-serif" }}>Loading...</span>
+        <span>Loading...</span>
       </div>
     </div>
   );
@@ -118,14 +117,14 @@ const ClientJobDetail = () => {
   const progressPct = job?.paymentProgress || 0;
 
   return (
-    <div className="min-h-screen flex" style={{ background: "linear-gradient(135deg, #190019 0%, #2B124C 100%)" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--bg)" }}>
       <ClientSidebar />
       <div className="flex-1 p-8 overflow-auto">
         <button onClick={() => navigate("/client/my-jobs")}
           className="flex items-center gap-2 text-sm mb-6 transition-all"
-          style={{ color: "rgba(223,182,178,0.5)" }}
-          onMouseEnter={e => e.currentTarget.style.color = "#DFB6B2"}
-          onMouseLeave={e => e.currentTarget.style.color = "rgba(223,182,178,0.5)"}>
+          style={{ color: "var(--muted)" }}
+          onMouseEnter={e => e.currentTarget.style.color = "var(--ink)"}
+          onMouseLeave={e => e.currentTarget.style.color = "var(--muted)"}>
           ← Back to My Jobs
         </button>
 
@@ -133,25 +132,24 @@ const ClientJobDetail = () => {
           <div className="lg:col-span-2 flex flex-col gap-6">
 
             {/* Job Info */}
-            <div className="rounded-2xl p-6"
-              style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
+            <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
               <div className="flex justify-between mb-4">
                 <span className="text-xs px-3 py-1 rounded-full border"
                   style={{
-                    background: job.status==='open' ? "rgba(16,185,129,0.1)" : job.status==='in_progress' ? "rgba(133,79,108,0.2)" : job.status==='completed' ? "rgba(133,79,108,0.3)" : "rgba(255,255,255,0.05)",
-                    color: job.status==='open' ? "#6ee7b7" : job.status==='in_progress' ? "#DFB6B2" : job.status==='completed' ? "#FBE4D8" : "#888",
-                    borderColor: job.status==='open' ? "rgba(16,185,129,0.25)" : "rgba(133,79,108,0.3)",
+                    background: job.status==='open' ? "rgba(16,185,129,0.1)" : "rgba(255,255,255,0.06)",
+                    color: job.status==='open' ? "#6ee7b7" : "var(--ink)",
+                    borderColor: job.status==='open' ? "rgba(16,185,129,0.25)" : "var(--border)",
                   }}>
                   {job.status==='completed' ? '🏆 Completed' : job.status}
                 </span>
-                <span className="text-sm" style={{ color: "rgba(223,182,178,0.4)" }}>{new Date(job.createdAt).toLocaleDateString()}</span>
+                <span className="text-sm" style={{ color: "var(--muted)" }}>{new Date(job.createdAt).toLocaleDateString()}</span>
               </div>
-              <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: "Syne, sans-serif", color: "#FBE4D8" }}>{job.title}</h1>
-              <p className="leading-relaxed mb-6 text-sm" style={{ color: "rgba(223,182,178,0.6)" }}>{job.description}</p>
+              <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--ink)" }}>{job.title}</h1>
+              <p className="leading-relaxed mb-6 text-sm" style={{ color: "var(--muted)" }}>{job.description}</p>
               <div className="flex flex-wrap gap-2">
                 {job.skills.map(skill => (
                   <span key={skill} className="text-xs px-3 py-1 rounded-lg"
-                    style={{ background: "rgba(133,79,108,0.15)", color: "#DFB6B2", border: "1px solid rgba(133,79,108,0.25)" }}>
+                    style={{ background: "rgba(255,255,255,0.05)", color: "var(--ink)", border: "1px solid var(--border)" }}>
                     {skill}
                   </span>
                 ))}
@@ -160,26 +158,25 @@ const ClientJobDetail = () => {
 
             {/* Payment Progress */}
             {job.status !== 'open' && job.milestones?.length > 0 && (
-              <div className="rounded-2xl p-6"
-                style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>📊 Payment Progress</h2>
+              <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+                <h2 className="text-lg font-bold mb-4" style={{ color: "var(--ink)" }}>📊 Payment Progress</h2>
                 <div className="mb-5">
                   <div className="flex justify-between text-sm mb-2">
-                    <span style={{ color: "rgba(223,182,178,0.5)" }}>Overall Released</span>
-                    <span className="font-bold" style={{ color: "#DFB6B2" }}>{progressPct}%</span>
+                    <span style={{ color: "var(--muted)" }}>Overall Released</span>
+                    <span className="font-bold" style={{ color: "var(--ink)" }}>{progressPct}%</span>
                   </div>
-                  <div className="w-full rounded-full h-3 overflow-hidden" style={{ background: "rgba(133,79,108,0.15)" }}>
+                  <div className="w-full rounded-full h-3 overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
                     <div className="h-3 rounded-full transition-all duration-700"
-                      style={{ width: `${progressPct}%`, background: "linear-gradient(90deg, #522B5B, #DFB6B2)" }}/>
+                      style={{ width: `${progressPct}%`, background: "rgba(255,255,255,0.85)" }}/>
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   {job.milestones.map((m, i) => (
                     <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl"
-                      style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.12)" }}>
+                      style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
                       <div>
-                        <span className="text-sm font-medium" style={{ color: "#DFB6B2" }}>{m.title}</span>
-                        <span className="text-xs ml-2" style={{ color: "rgba(223,182,178,0.4)" }}>
+                        <span className="text-sm font-medium" style={{ color: "var(--ink)" }}>{m.title}</span>
+                        <span className="text-xs ml-2" style={{ color: "var(--muted)" }}>
                           ({m.percentage}% = {(job.budget * m.percentage / 100).toFixed(4)} MSTC)
                         </span>
                       </div>
@@ -194,37 +191,34 @@ const ClientJobDetail = () => {
 
             {/* Escrow Contract */}
             {job.escrowAddress && (
-              <div className="rounded-2xl p-6"
-                style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.35)" }}>
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>⛓️ Escrow Contract</h2>
-                <div className="text-xs font-mono mb-4 break-all" style={{ color: "rgba(223,182,178,0.35)" }}>{job.escrowAddress}</div>
+              <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+                <h2 className="text-lg font-bold mb-4" style={{ color: "var(--ink)" }}>⛓️ Escrow Contract</h2>
+                <div className="text-xs font-mono mb-4 break-all" style={{ color: "var(--muted)" }}>{job.escrowAddress}</div>
                 {escrowStatus && (
                   <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="rounded-xl p-3" style={{ background: "rgba(25,0,25,0.5)" }}>
-                      <div className="text-xs mb-1" style={{ color: "rgba(223,182,178,0.4)" }}>Status</div>
-                      <div className="font-semibold text-sm" style={{ color: escrowStatus.isCompleted ? "#6ee7b7" : escrowStatus.isRefunded ? "#ff9999" : escrowStatus.isFunded ? "#DFB6B2" : "#fbbf24" }}>
+                    <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)" }}>
+                      <div className="text-xs mb-1" style={{ color: "var(--muted)" }}>Status</div>
+                      <div className="font-semibold text-sm" style={{ color: escrowStatus.isCompleted ? "#6ee7b7" : escrowStatus.isRefunded ? "#ff9999" : escrowStatus.isFunded ? "var(--ink)" : "#fbbf24" }}>
                         {escrowStatus.isCompleted ? '✅ Completed' : escrowStatus.isRefunded ? '↩️ Refunded' : escrowStatus.isFunded ? '🔒 Funded' : '⏳ Awaiting Deposit'}
                       </div>
                     </div>
-                    <div className="rounded-xl p-3" style={{ background: "rgba(25,0,25,0.5)" }}>
-                      <div className="text-xs mb-1" style={{ color: "rgba(223,182,178,0.4)" }}>Locked Amount</div>
-                      <div className="font-bold" style={{ color: "#DFB6B2" }}>{escrowStatus.amount} MSTC</div>
+                    <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)" }}>
+                      <div className="text-xs mb-1" style={{ color: "var(--muted)" }}>Locked Amount</div>
+                      <div className="font-bold" style={{ color: "var(--ink)" }}>{escrowStatus.amount} MSTC</div>
                     </div>
                   </div>
                 )}
                 {escrowStatus && !escrowStatus.isCompleted && !escrowStatus.isRefunded && (
                   <div className="flex gap-3">
                     {!escrowStatus.isFunded && (
-                      <button onClick={handleDeposit} disabled={escrowLoading}
-                        className="px-4 py-2 rounded-xl text-sm font-semibold transition-all disabled:opacity-50"
-                        style={{ background: "linear-gradient(135deg, #522B5B, #854F6C)", color: "#FBE4D8" }}>
+                      <button onClick={handleDeposit} disabled={escrowLoading} className="rg-pill text-sm px-4 py-2">
                         {escrowLoading ? "Processing..." : "💰 Deposit Funds"}
                       </button>
                     )}
                     {escrowStatus.isFunded && (
                       <button onClick={handleRefund} disabled={escrowLoading}
                         className="px-4 py-2 rounded-xl text-sm font-semibold transition-all disabled:opacity-50"
-                        style={{ background: "rgba(255,80,80,0.15)", border: "1px solid rgba(255,80,80,0.3)", color: "#ff9999" }}>
+                        style={{ background: "rgba(255,80,80,0.12)", border: "1px solid rgba(255,120,120,0.3)", color: "#ffb3b3" }}>
                         {escrowLoading ? "Processing..." : "↩️ Refund"}
                       </button>
                     )}
@@ -232,7 +226,7 @@ const ClientJobDetail = () => {
                 )}
                 {txHash && (
                   <a href={`https://mstscan.com/tx/${txHash}`} target="_blank" rel="noopener noreferrer"
-                    className="text-xs mt-3 block hover:underline" style={{ color: "rgba(133,79,108,0.7)" }}>
+                    className="text-xs mt-3 block hover:underline" style={{ color: "var(--muted)" }}>
                     View on Etherscan ↗
                   </a>
                 )}
@@ -252,23 +246,21 @@ const ClientJobDetail = () => {
             )}
 
             {/* Bids */}
-            <div className="rounded-2xl p-6"
-              style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>
+            <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+              <h2 className="text-lg font-bold mb-4" style={{ color: "var(--ink)" }}>
                 Bids ({bids.length})
               </h2>
               {bids.length === 0
-                ? <p className="text-sm" style={{ color: "rgba(223,182,178,0.35)" }}>No bids yet</p>
+                ? <p className="text-sm" style={{ color: "var(--muted)" }}>No bids yet</p>
                 : (
                   <div className="flex flex-col gap-4">
                     {bids.map(bid => (
-                      <div key={bid._id} className="rounded-xl p-4"
-                        style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.15)" }}>
+                      <div key={bid._id} className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
                         <div className="flex justify-between mb-2">
-                          <span className="font-bold" style={{ color: "#DFB6B2" }}>{bid.amount} MSTC</span>
-                          <span className="text-sm" style={{ color: "rgba(223,182,178,0.5)" }}>{bid.deliveryDays} days</span>
+                          <span className="font-bold" style={{ color: "var(--ink)" }}>{bid.amount} MSTC</span>
+                          <span className="text-sm" style={{ color: "var(--muted)" }}>{bid.deliveryDays} days</span>
                         </div>
-                        <p className="text-sm mb-3" style={{ color: "rgba(223,182,178,0.6)" }}>{bid.proposal}</p>
+                        <p className="text-sm mb-3" style={{ color: "var(--muted)" }}>{bid.proposal}</p>
 
                         {/* ── ZK Reputation Badge for each bidder ── */}
                         <div className="mb-3">
@@ -277,13 +269,11 @@ const ClientJobDetail = () => {
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <p className="text-xs font-mono" style={{ color: "rgba(133,79,108,0.6)" }}>
+                          <p className="text-xs font-mono" style={{ color: "var(--muted)" }}>
                             {bid.freelancer?.walletAddress?.slice(0, 10)}...
                           </p>
                           {job.status === 'open' && (
-                            <button onClick={() => handleHire(bid)} disabled={escrowLoading}
-                              className="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all disabled:opacity-50"
-                              style={{ background: "linear-gradient(135deg, #522B5B, #854F6C)", color: "#FBE4D8" }}>
+                            <button onClick={() => handleHire(bid)} disabled={escrowLoading} className="rg-pill text-sm px-4 py-1.5">
                               {escrowLoading ? "Deploying..." : "🤝 Hire"}
                             </button>
                           )}
@@ -297,21 +287,19 @@ const ClientJobDetail = () => {
 
           {/* Right sidebar */}
           <div className="flex flex-col gap-6">
-            <div className="rounded-2xl p-6"
-              style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-              <div className="text-3xl font-black mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>
+            <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+              <div className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>
                 {job.budget} MSTC
               </div>
-              <div className="text-sm mb-5" style={{ color: "rgba(223,182,178,0.4)" }}>Budget</div>
-              <div className="text-sm mb-2" style={{ color: "rgba(223,182,178,0.6)" }}>
-                <span style={{ color: "rgba(133,79,108,0.8)" }}>Deadline: </span>
+              <div className="text-sm mb-5" style={{ color: "var(--muted)" }}>Budget</div>
+              <div className="text-sm mb-2" style={{ color: "var(--muted)" }}>
+                <span style={{ color: "var(--nav)" }}>Deadline: </span>
                 {new Date(job.deadline).toLocaleDateString()}
               </div>
               {job.status === 'completed' && (
-                <div className="mt-4 rounded-xl p-3 text-center"
-                  style={{ background: "rgba(133,79,108,0.15)", border: "1px solid rgba(133,79,108,0.3)" }}>
-                  <div className="font-bold" style={{ color: "#DFB6B2" }}>🏆 Job Completed!</div>
-                  <div className="text-xs mt-1" style={{ color: "rgba(223,182,178,0.45)" }}>All payments released</div>
+                <div className="mt-4 rounded-xl p-3 text-center" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid var(--border)" }}>
+                  <div className="font-bold" style={{ color: "var(--ink)" }}>🏆 Job Completed!</div>
+                  <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>All payments released</div>
                 </div>
               )}
             </div>

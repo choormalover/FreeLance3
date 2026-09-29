@@ -44,40 +44,40 @@ const FreelancerProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ background: "linear-gradient(135deg, #021024 0%, #052659 100%)" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--bg)" }}>
       <FreelancerSidebar />
       <main className="flex-1 p-8 overflow-auto">
 
         <div className="mb-8">
-          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "rgba(84,131,179,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>Freelancer Portal</p>
-          <h1 className="text-3xl font-black mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>My Profile</h1>
-          <p className="text-sm" style={{ color: "rgba(193,232,255,0.4)" }}>Your public profile, verified skills and reputation</p>
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--muted)" }}>Freelancer Portal</p>
+          <h1 className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>My Profile</h1>
+          <p className="text-sm" style={{ color: "var(--muted)" }}>Your public profile, verified skills and reputation</p>
         </div>
 
         <div className="max-w-3xl flex flex-col gap-6">
 
           {/* Identity card */}
-          <div className="rounded-2xl p-6" style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
+          <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
             <div className="flex items-center gap-5">
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #052659, #5483B3)", boxShadow: "0 0 20px rgba(84,131,179,0.3)" }}>
+                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)" }}>
                 💻
               </div>
               <div>
-                <h2 className="text-xl font-bold mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+                <h2 className="text-xl font-bold mb-1" style={{ color: "var(--ink)" }}>
                   {user?.username || "Freelancer"}
                 </h2>
-                <p className="text-xs font-mono mb-2" style={{ color: "rgba(193,232,255,0.4)" }}>
+                <p className="text-xs font-mono mb-2" style={{ color: "var(--muted)" }}>
                   {account && account !== "email-user" ? account : user?.email}
                 </p>
                 <div className="flex items-center gap-2">
                   <span className="text-xs px-2 py-0.5 rounded-full"
-                    style={{ background: "rgba(84,131,179,0.2)", color: "#7DA0CA", border: "1px solid rgba(84,131,179,0.3)", fontFamily: "Space Grotesk, sans-serif" }}>
+                    style={{ background: "rgba(255,255,255,0.06)", color: "var(--ink)", border: "1px solid var(--border)" }}>
                     💻 Freelancer
                   </span>
                   {zkProof?.proof?.verified && (
                     <span className="text-xs px-2 py-0.5 rounded-full"
-                      style={{ background: `${zkProof.proof.verifiedColor}15`, color: zkProof.proof.verifiedColor, border: `1px solid ${zkProof.proof.verifiedColor}30`, fontFamily: "Space Grotesk, sans-serif" }}>
+                      style={{ background: `${zkProof.proof.verifiedColor}15`, color: zkProof.proof.verifiedColor, border: `1px solid ${zkProof.proof.verifiedColor}30` }}>
                       {zkProof.proof.verifiedEmoji} {zkProof.proof.verifiedLevel}
                     </span>
                   )}
@@ -88,29 +88,27 @@ const FreelancerProfile = () => {
 
           {/* ZK Reputation summary */}
           {zkProof?.proof && (
-            <div className="rounded-2xl p-6" style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
-              <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>🛡️ ZK Reputation</h2>
+            <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+              <h2 className="text-lg font-bold mb-4" style={{ color: "var(--ink)" }}>🛡️ ZK Reputation</h2>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
                   style={{ background: zkProof.proof.verified ? `${zkProof.proof.verifiedColor}15` : "rgba(255,255,255,0.04)", border: `1px solid ${zkProof.proof.verified ? `${zkProof.proof.verifiedColor}30` : "rgba(255,255,255,0.08)"}` }}>
                   {zkProof.proof.verifiedEmoji || "◌"}
                 </div>
                 <div className="flex-1">
-                  <p className="font-bold text-sm mb-0.5" style={{ color: zkProof.proof.verified ? zkProof.proof.verifiedColor : "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk, sans-serif" }}>
+                  <p className="font-bold text-sm mb-0.5" style={{ color: zkProof.proof.verified ? zkProof.proof.verifiedColor : "var(--muted)" }}>
                     {zkProof.proof.verified ? `${zkProof.proof.verifiedLevel} Freelancer` : "No reputation yet"}
                   </p>
-                  <p className="text-xs" style={{ color: "rgba(193,232,255,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>
+                  <p className="text-xs" style={{ color: "var(--muted)" }}>
                     {zkProof.proof.publicStatement}
                   </p>
                   {zkProof.privateData && (
-                    <p className="text-xs mt-1" style={{ color: "rgba(193,232,255,0.3)", fontFamily: "Space Grotesk, sans-serif" }}>
+                    <p className="text-xs mt-1" style={{ color: "var(--muted)" }}>
                       Based on {zkProof.privateData.totalRatings} private rating{zkProof.privateData.totalRatings !== 1 ? "s" : ""}
                     </p>
                   )}
                 </div>
-                <button onClick={() => navigate("/freelancer/reputation")}
-                  className="text-xs px-3 py-1.5 rounded-xl transition-all flex-shrink-0"
-                  style={{ background: "rgba(84,131,179,0.15)", color: "#7DA0CA", border: "1px solid rgba(84,131,179,0.25)", fontFamily: "Space Grotesk, sans-serif" }}>
+                <button onClick={() => navigate("/freelancer/reputation")} className="rg-pill-outline text-xs px-3 py-1.5 flex-shrink-0">
                   View Details →
                 </button>
               </div>
@@ -118,32 +116,28 @@ const FreelancerProfile = () => {
           )}
 
           {/* Verified skill badges */}
-          <div className="rounded-2xl p-6" style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
+          <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>🎓 Verified Skills</h2>
-              <button onClick={() => navigate("/freelancer/skill-verify")}
-                className="text-xs px-3 py-1.5 rounded-xl transition-all"
-                style={{ background: "linear-gradient(135deg, #052659, #5483B3)", color: "#C1E8FF", fontFamily: "Space Grotesk, sans-serif" }}>
+              <h2 className="text-lg font-bold" style={{ color: "var(--ink)" }}>🎓 Verified Skills</h2>
+              <button onClick={() => navigate("/freelancer/skill-verify")} className="rg-pill text-xs px-3 py-1.5">
                 + Verify More
               </button>
             </div>
 
             {loading && (
-              <div className="flex items-center gap-2" style={{ color: "rgba(193,232,255,0.3)" }}>
+              <div className="flex items-center gap-2" style={{ color: "var(--muted)" }}>
                 <span className="w-3 h-3 rounded-full border-2 border-current border-t-transparent animate-spin"/>
-                <span className="text-xs" style={{ fontFamily: "Space Grotesk, sans-serif" }}>Loading badges...</span>
+                <span className="text-xs">Loading badges...</span>
               </div>
             )}
 
             {!loading && verifiedSkills.length === 0 && (
-              <div className="text-center py-8 rounded-xl" style={{ background: "rgba(2,16,36,0.4)", border: "1px dashed rgba(84,131,179,0.2)" }}>
+              <div className="text-center py-8 rounded-xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px dashed var(--border)" }}>
                 <div className="text-3xl mb-2">🎓</div>
-                <p className="text-sm mb-3" style={{ color: "rgba(193,232,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>
+                <p className="text-sm mb-3" style={{ color: "var(--muted)" }}>
                   No verified skills yet
                 </p>
-                <button onClick={() => navigate("/freelancer/skill-verify")}
-                  className="text-xs px-4 py-2 rounded-xl"
-                  style={{ background: "rgba(84,131,179,0.15)", color: "#7DA0CA", border: "1px solid rgba(84,131,179,0.25)", fontFamily: "Space Grotesk, sans-serif" }}>
+                <button onClick={() => navigate("/freelancer/skill-verify")} className="rg-pill-outline text-xs px-4 py-2">
                   Get Verified Now
                 </button>
               </div>
@@ -156,10 +150,10 @@ const FreelancerProfile = () => {
                     style={{ background: `${s.badgeColor || "#6ee7b7"}10`, border: `1px solid ${s.badgeColor || "#6ee7b7"}30` }}>
                     <span className="text-xl">{s.badgeEmoji || "✓"}</span>
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: s.badgeColor || "#6ee7b7", fontFamily: "Space Grotesk, sans-serif" }}>
+                      <div className="text-sm font-semibold" style={{ color: s.badgeColor || "#6ee7b7" }}>
                         {s.skill}
                       </div>
-                      <div className="text-xs" style={{ color: `${s.badgeColor || "#6ee7b7"}70`, fontFamily: "Space Grotesk, sans-serif" }}>
+                      <div className="text-xs" style={{ color: `${s.badgeColor || "#6ee7b7"}70` }}>
                         {s.badgeLevel || "Verified"} · {new Date(s.verifiedAt).toLocaleDateString()}
                       </div>
                     </div>
@@ -170,38 +164,26 @@ const FreelancerProfile = () => {
           </div>
 
           {/* Edit profile form */}
-          <form onSubmit={handleSave} className="rounded-2xl p-6 flex flex-col gap-5"
-            style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
-            <h2 className="text-lg font-bold" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>✏️ Edit Profile</h2>
+          <form onSubmit={handleSave} className="rounded-2xl p-6 flex flex-col gap-5" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+            <h2 className="text-lg font-bold" style={{ color: "var(--ink)" }}>✏️ Edit Profile</h2>
 
             <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(193,232,255,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Full Name</label>
-              <input value={form.username} onChange={e => setForm({...form, username: e.target.value})} placeholder="Your name"
-                className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-                style={{ background: "rgba(2,16,36,0.6)", border: "1px solid rgba(84,131,179,0.2)", color: "#C1E8FF" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(84,131,179,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(84,131,179,0.2)"}/>
+              <label className="block text-sm mb-1.5" style={{ color: "var(--muted)" }}>Full Name</label>
+              <input value={form.username} onChange={e => setForm({...form, username: e.target.value})} placeholder="Your name" className="rg-input"/>
             </div>
 
             <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(193,232,255,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Bio</label>
+              <label className="block text-sm mb-1.5" style={{ color: "var(--muted)" }}>Bio</label>
               <textarea value={form.bio} onChange={e => setForm({...form, bio: e.target.value})}
                 placeholder="Tell clients about your experience and expertise..."
-                rows={4} className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-none"
-                style={{ background: "rgba(2,16,36,0.6)", border: "1px solid rgba(84,131,179,0.2)", color: "#C1E8FF", lineHeight: "1.7" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(84,131,179,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(84,131,179,0.2)"}/>
+                rows={4} className="rg-input resize-none" style={{ lineHeight: "1.7" }}/>
             </div>
 
             <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(193,232,255,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Skills</label>
+              <label className="block text-sm mb-1.5" style={{ color: "var(--muted)" }}>Skills</label>
               <input value={form.skills} onChange={e => setForm({...form, skills: e.target.value})}
-                placeholder="React, Solidity, Node.js, Python"
-                className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-                style={{ background: "rgba(2,16,36,0.6)", border: "1px solid rgba(84,131,179,0.2)", color: "#C1E8FF" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(84,131,179,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(84,131,179,0.2)"}/>
-              <p className="text-xs mt-1" style={{ color: "rgba(84,131,179,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Separate with commas</p>
+                placeholder="React, Solidity, Node.js, Python" className="rg-input"/>
+              <p className="text-xs mt-1" style={{ color: "var(--muted)" }}>Separate with commas</p>
             </div>
 
             {saved && (
@@ -210,8 +192,7 @@ const FreelancerProfile = () => {
               </div>
             )}
 
-            <button type="submit" className="py-3 rounded-xl font-semibold transition-all"
-              style={{ background: "linear-gradient(135deg, #052659, #5483B3)", color: "#C1E8FF", fontFamily: "Space Grotesk, sans-serif" }}>
+            <button type="submit" className="rg-pill py-3">
               Save Profile
             </button>
           </form>

@@ -19,27 +19,26 @@ const FreelancerReputation = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex" style={{ background: "linear-gradient(135deg, #021024 0%, #052659 100%)" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--bg)" }}>
       <FreelancerSidebar />
       <main className="flex-1 p-8 overflow-auto">
 
         <div className="mb-8">
-          <p className="text-xs tracking-widest uppercase mb-2"
-            style={{ color: "rgba(84,131,179,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--muted)" }}>
             Zero Knowledge Proof
           </p>
-          <h1 className="text-3xl font-black mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+          <h1 className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>
             My Reputation
           </h1>
-          <p className="text-sm" style={{ color: "rgba(193,232,255,0.4)" }}>
+          <p className="text-sm" style={{ color: "var(--muted)" }}>
             Your actual score is private. Only a ZK proof of your level is shown to clients.
           </p>
         </div>
 
         {loading && (
-          <div className="flex items-center gap-3" style={{ color: "rgba(193,232,255,0.4)" }}>
+          <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
             <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin"/>
-            <span className="text-sm" style={{ fontFamily: "Space Grotesk, sans-serif" }}>Loading your proof...</span>
+            <span className="text-sm">Loading your proof...</span>
           </div>
         )}
 
@@ -47,9 +46,8 @@ const FreelancerReputation = () => {
           <div className="max-w-2xl flex flex-col gap-6">
 
             {/* Current ZK Level */}
-            <div className="rounded-2xl p-7"
-              style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
-              <h2 className="text-lg font-bold mb-5" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+            <div className="rounded-2xl p-7" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+              <h2 className="text-lg font-bold mb-5" style={{ color: "var(--ink)" }}>
                 🛡️ Your ZK Proof (What Clients See)
               </h2>
 
@@ -62,21 +60,21 @@ const FreelancerReputation = () => {
                       border: `1px solid ${data.proof.verified ? `${data.proof.verifiedColor}30` : "rgba(255,255,255,0.08)"}`,
                     }}>
                     <div className="text-5xl mb-3">{data.proof.verifiedEmoji || "◌"}</div>
-                    <h3 className="text-2xl font-black mb-1"
-                      style={{ fontFamily: "Syne, sans-serif", color: data.proof.verified ? data.proof.verifiedColor : "rgba(255,255,255,0.3)" }}>
+                    <h3 className="text-2xl font-bold mb-1"
+                      style={{ color: data.proof.verified ? data.proof.verifiedColor : "var(--muted)" }}>
                       {data.proof.verified ? `${data.proof.verifiedLevel} Freelancer` : "No Level Yet"}
                     </h3>
-                    <p className="text-sm" style={{ color: "rgba(193,232,255,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>
+                    <p className="text-sm" style={{ color: "var(--muted)" }}>
                       {data.proof.publicStatement}
                     </p>
                   </div>
 
                   {/* Proof hash */}
-                  <div className="p-4 rounded-xl" style={{ background: "rgba(2,16,36,0.5)", border: "1px solid rgba(84,131,179,0.12)" }}>
-                    <p className="text-xs mb-2" style={{ color: "rgba(193,232,255,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>
+                  <div className="p-4 rounded-xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
+                    <p className="text-xs mb-2" style={{ color: "var(--muted)" }}>
                       Proof Hash (public on-chain)
                     </p>
-                    <p className="text-xs font-mono break-all" style={{ color: "rgba(193,232,255,0.3)" }}>
+                    <p className="text-xs font-mono break-all" style={{ color: "var(--muted)" }}>
                       {data.proof.proofHash}
                     </p>
                   </div>
@@ -84,10 +82,10 @@ const FreelancerReputation = () => {
               ) : (
                 <div className="text-center py-10">
                   <div className="text-5xl mb-4">🔮</div>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "var(--ink)" }}>
                     No Proof Yet
                   </h3>
-                  <p className="text-sm" style={{ color: "rgba(193,232,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>
+                  <p className="text-sm" style={{ color: "var(--muted)" }}>
                     Complete jobs and get rated by clients to generate your ZK proof.
                   </p>
                 </div>
@@ -96,24 +94,21 @@ const FreelancerReputation = () => {
 
             {/* Threshold progress — private */}
             {data?.privateData && (
-              <div className="rounded-2xl p-7"
-                style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.2)" }}>
+              <div className="rounded-2xl p-7" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
                 <div className="flex items-center gap-2 mb-5">
                   <span>🔒</span>
-                  <h2 className="text-lg font-bold" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+                  <h2 className="text-lg font-bold" style={{ color: "var(--ink)" }}>
                     Private Data (Only You)
                   </h2>
                 </div>
 
                 {/* Score + count */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="rounded-xl p-5 text-center"
-                    style={{ background: "rgba(2,16,36,0.5)", border: "1px solid rgba(84,131,179,0.12)" }}>
-                    <div className="text-3xl font-black mb-1"
-                      style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+                  <div className="rounded-xl p-5 text-center" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
+                    <div className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>
                       {data.privateData.averageScore > 0 ? `${data.privateData.averageScore}` : "—"}
                     </div>
-                    <div className="text-xs mb-1" style={{ color: "rgba(193,232,255,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>
+                    <div className="text-xs mb-1" style={{ color: "var(--muted)" }}>
                       Weighted Avg Score
                     </div>
                     <div className="flex justify-center gap-0.5">
@@ -122,13 +117,11 @@ const FreelancerReputation = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="rounded-xl p-5 text-center"
-                    style={{ background: "rgba(2,16,36,0.5)", border: "1px solid rgba(84,131,179,0.12)" }}>
-                    <div className="text-3xl font-black mb-1"
-                      style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+                  <div className="rounded-xl p-5 text-center" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)" }}>
+                    <div className="text-3xl font-bold mb-1" style={{ color: "var(--ink)" }}>
                       {data.privateData.totalRatings}
                     </div>
-                    <div className="text-xs" style={{ color: "rgba(193,232,255,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>
+                    <div className="text-xs" style={{ color: "var(--muted)" }}>
                       Total Ratings
                     </div>
                   </div>
@@ -136,28 +129,27 @@ const FreelancerReputation = () => {
 
                 {/* Threshold levels */}
                 <div>
-                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase"
-                    style={{ color: "rgba(84,131,179,0.6)", fontFamily: "Space Grotesk, sans-serif" }}>
+                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "var(--muted)" }}>
                     Reputation Levels
                   </p>
                   <div className="flex flex-col gap-3">
                     {data.privateData.thresholds?.map(t => (
                       <div key={t.level} className="flex items-center gap-4 p-4 rounded-xl"
                         style={{
-                          background: t.met ? `${t.color}08` : "rgba(2,16,36,0.4)",
-                          border: `1px solid ${t.met ? `${t.color}30` : "rgba(84,131,179,0.1)"}`,
+                          background: t.met ? `${t.color}08` : "rgba(255,255,255,0.02)",
+                          border: `1px solid ${t.met ? `${t.color}30` : "var(--border)"}`,
                         }}>
                         <span className="text-2xl">{t.met ? t.emoji : "◌"}</span>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-0.5">
-                            <span className="text-sm font-bold" style={{ color: t.met ? t.color : "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk, sans-serif" }}>
+                            <span className="text-sm font-bold" style={{ color: t.met ? t.color : "var(--muted)" }}>
                               {t.level}
                             </span>
-                            <span className="text-xs" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Space Grotesk, sans-serif" }}>
+                            <span className="text-xs" style={{ color: "var(--muted)" }}>
                               ≥ {t.min} ★
                             </span>
                           </div>
-                          <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Space Grotesk, sans-serif" }}>
+                          <p className="text-xs" style={{ color: "var(--muted)" }}>
                             {t.desc}
                           </p>
                           {/* Progress toward this threshold */}
@@ -171,7 +163,7 @@ const FreelancerReputation = () => {
                         </div>
                         {t.met && (
                           <span className="text-xs px-2 py-1 rounded-full flex-shrink-0"
-                            style={{ background: `${t.color}20`, color: t.color, fontFamily: "Space Grotesk, sans-serif", border: `1px solid ${t.color}40` }}>
+                            style={{ background: `${t.color}20`, color: t.color, border: `1px solid ${t.color}40` }}>
                             ✓ Met
                           </span>
                         )}
@@ -180,16 +172,15 @@ const FreelancerReputation = () => {
                   </div>
                 </div>
 
-                <p className="text-xs mt-4 text-center" style={{ color: "rgba(193,232,255,0.2)", fontFamily: "Space Grotesk, sans-serif" }}>
+                <p className="text-xs mt-4 text-center" style={{ color: "var(--muted)" }}>
                   🔒 This data is never shared with clients. They only see your ZK proof level above.
                 </p>
               </div>
             )}
 
             {/* How it works */}
-            <div className="rounded-2xl p-7"
-              style={{ background: "rgba(5,38,89,0.5)", border: "1px solid rgba(84,131,179,0.15)" }}>
-              <h2 className="text-lg font-bold mb-5" style={{ fontFamily: "Syne, sans-serif", color: "#C1E8FF" }}>
+            <div className="rounded-2xl p-7" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+              <h2 className="text-lg font-bold mb-5" style={{ color: "var(--ink)" }}>
                 How ZK Reputation Works
               </h2>
               <div className="flex flex-col gap-4">
@@ -201,12 +192,12 @@ const FreelancerReputation = () => {
                 ].map(item => (
                   <div key={item.step} className="flex gap-4">
                     <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-xs font-bold"
-                      style={{ background: "rgba(84,131,179,0.2)", color: "#7DA0CA", fontFamily: "Space Grotesk, sans-serif" }}>
+                      style={{ background: "rgba(255,255,255,0.06)", color: "var(--ink)" }}>
                       {item.step}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold mb-0.5" style={{ color: "#C1E8FF", fontFamily: "Space Grotesk, sans-serif" }}>{item.title}</p>
-                      <p className="text-xs leading-relaxed" style={{ color: "rgba(193,232,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>{item.desc}</p>
+                      <p className="text-sm font-semibold mb-0.5" style={{ color: "var(--ink)" }}>{item.title}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "var(--muted)" }}>{item.desc}</p>
                     </div>
                   </div>
                 ))}

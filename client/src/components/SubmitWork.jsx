@@ -29,50 +29,51 @@ const SubmitWork = ({ jobId, milestones, onSubmitted }) => {
   };
 
   if (success) return (
-    <div className="bg-green-900/30 border border-green-700 rounded-2xl p-6">
-      <div className="text-green-400 font-semibold mb-1">✅ Work submitted!</div>
-      <p className="text-gray-400 text-sm">Waiting for client to review and release payment.</p>
+    <div className="rounded-2xl p-6" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.3)" }}>
+      <div className="font-semibold mb-1" style={{ color: "#6ee7b7" }}>✅ Work submitted!</div>
+      <p className="text-sm" style={{ color: "var(--muted)" }}>Waiting for client to review and release payment.</p>
     </div>
   );
 
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-      <h3 className="font-semibold mb-4">📤 Submit Your Work</h3>
+    <div className="rounded-2xl p-6" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+      <h3 className="font-semibold mb-4" style={{ color: "var(--ink)" }}>📤 Submit Your Work</h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {milestones && milestones.length > 0 && (
           <div>
-            <label className="block text-sm text-gray-400 mb-1.5">Submitting for Milestone</label>
-            <select value={milestoneIndex} onChange={e => setMilestoneIndex(Number(e.target.value))}
-              className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-violet-500">
+            <label className="block text-sm mb-1.5" style={{ color: "var(--muted)" }}>Submitting for Milestone</label>
+            <select value={milestoneIndex} onChange={e => setMilestoneIndex(Number(e.target.value))} className="rg-input">
               {milestones.map((m, i) => (
                 <option key={i} value={i}>{m.title} ({m.percentage}%)</option>
               ))}
             </select>
           </div>
         )}
-        <div className="border-2 border-dashed border-gray-700 rounded-xl p-6 text-center cursor-pointer hover:border-violet-500 transition-colors"
+        <div className="rounded-xl p-6 text-center cursor-pointer transition-colors"
+          style={{ border: "2px dashed var(--border)" }}
+          onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"}
+          onMouseLeave={e => e.currentTarget.style.borderColor = "var(--border)"}
           onClick={() => document.getElementById("fileInput").click()}>
           <input id="fileInput" type="file" onChange={e => setFile(e.target.files[0])} className="hidden"
             accept=".pdf,.zip,.png,.jpg,.jpeg,.txt,.doc,.docx"/>
           {file ? (
             <div>
-              <div className="text-violet-400 font-medium">{file.name}</div>
-              <div className="text-gray-500 text-xs mt-1">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+              <div className="font-medium" style={{ color: "var(--ink)" }}>{file.name}</div>
+              <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
             </div>
           ) : (
             <div>
               <div className="text-4xl mb-2">📁</div>
-              <div className="text-gray-400 text-sm">Click to upload your work file</div>
-              <div className="text-gray-600 text-xs mt-1">PDF, ZIP, Images, Documents (max 10MB)</div>
+              <div className="text-sm" style={{ color: "var(--muted)" }}>Click to upload your work file</div>
+              <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>PDF, ZIP, Images, Documents (max 10MB)</div>
             </div>
           )}
         </div>
         <textarea value={message} onChange={e => setMessage(e.target.value)}
           placeholder="Add a message (optional)..." rows={3}
-          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500 text-sm resize-none"/>
-        {error && <p className="text-red-400 text-sm">{error}</p>}
-        <button type="submit" disabled={loading || !file}
-          className="bg-violet-600 hover:bg-violet-700 text-white py-3 rounded-xl font-semibold transition-all disabled:opacity-50">
+          className="rg-input text-sm resize-none"/>
+        {error && <p className="text-sm" style={{ color: "#ffb3b3" }}>{error}</p>}
+        <button type="submit" disabled={loading || !file} className="rg-pill py-3">
           {loading ? "Uploading..." : "Submit Work"}
         </button>
       </form>
